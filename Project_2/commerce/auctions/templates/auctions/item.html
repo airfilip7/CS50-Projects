@@ -1,0 +1,103 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+<div style="height: 80px; margin-bottom: 20px">
+    {% if request.user.pk != publisher.pk %}
+    <form style="display: block" action="{% url 'view' item.name%}" method="post">
+        {% csrf_token %}
+        {% if not user_watchlist  %}
+            <input class="btn btn-primary" type="submit" name="add" value="Add to watchlist" style="float: right; margin-top: 5px">
+        {% else %}
+            <input class="btn btn-secondary" type="submit" name="remove" value="Remove from watchlist" style="float: right; display: inline">
+        {% endif %}
+    </form>
+    {% else %}
+        <form style="display: block" action="{% url 'view' item.name%}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-secondary" type="submit" name="close" value="Close listing"  style="float: right; margin-top: 5px">
+        </form>
+    {% endif %}
+    <h1> {{ item.name }} </h1>
+    {% if user_watchlist  %}
+        <span class="badge bg-secondary" style="color: white;">Watchlist</span>
+    {% endif %}
+    
+</div>
+
+<center>
+    <img src="{{ item.photo.url }}" class="item_img">
+</center>
+
+<div class="arrange">
+    <h4>Details</h4>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"> Published by: {{ publisher }} </li>
+        <li class="list-group-item"> Category: {{ item.category }} </li>
+        <li class="list-group-item"> Starting at: ${{ item.starting }} </li>
+        <li class="list-group-item"> Description: {{ item.description }} </li>
+        {% if not item.date_created %}
+        <li class="list-group-item"> Date published: n/a </li>
+        {% else %}
+        <li class="list-group-item"> Date published: {{ item.date_created }} </li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="current">
+    {% if not current %}
+        Starting price: <strong> {{ item.starting }} </strong>
+    {% else %}
+        Current price: <strong> ${{ current }} </strong>
+    {% endif %}
+</div>
+{% if request.user.pk != publisher.pk %}
+<form action="{% url 'view' item.name %}" method="post">
+    {% csrf_token %}
+    {% for field in  form%}
+        <div class="mb-3">
+            {{ field }}
+            {% if error %}
+                <div style="color: red"> {{ error }} 
+            {% elif message %}
+                <div style="color: green"> {{ message }}
+            {% endif %}
+        </div>
+    {% endfor %}
+    <input class="btn btn-primary" type="submit" name="place_bid" value="Place bid">
+</form>   
+{% endif %}
+
+<div class="arrange">
+<h4> Add a comment </h4>
+<form action="{% url 'view' item.name %}" method="post">
+    {% csrf_token %}
+    {% for field in  comm_form%}
+        <div class="mb-3">
+            {{ field }}
+        </div>
+    {% endfor %}
+    <input class="btn btn-primary" type="submit" name="comment" value="Comment">
+</form>   
+</div>
+
+<div class="arrange">
+<h4 style="padding-bottom: 30px"> Comments </h4>
+{% for comment in comments %}
+    <div class="card text-left" style="width: 75%; margin-bottom: 25px;margin-left: 40px">
+        <div class="card-header" style="display: inline-block">
+            {{ comment.user }} <p style="float: right"> {{ comment.date_posted }} </p>
+        </div>
+        <div class="card-body">
+            <p class="card-text" style="float: left">{{ comment.description }}</p>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+
+{% endblock %}

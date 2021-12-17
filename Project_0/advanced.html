@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <title>Search</title>
+</head>
+
+<style>
+    html, body, div {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: 100%;
+        vertical-align: baseline;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+    }
+
+    .center {
+        display: block;
+        text-align: -webkit-center;
+    }
+
+    .top_cont {
+        height: 60px;
+        width: 100%;
+        background: #f1f1f1;;
+        line-height: 58px;
+        vertical-align: middle;
+    }
+
+    .links-cont {
+        min-width: 165px;
+        padding-left: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 30px;
+        position: relative;
+        text-align: right;
+        z-index: 986;
+        -webkit-align-items: center;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .links {
+        font: Arial;
+        font-size: 13px;
+        color: rgba(0,0,0,0.87);
+        text-decoration: none;
+        display: inline-block;
+        line-height: 24px;
+        outline: none;
+        vertical-align: middle;
+        padding-right: 15px;
+    }
+
+    .logo_cont {
+        position: relative;
+        padding: 0 20px 0 15px;
+        top: 2px;
+        display: inline-block;
+        line-height: 0;
+        outline: none;
+        height: 58px;
+        vertical-align: middle;
+    }
+
+    .txt_advanced {
+        color: #d93025;
+        font-size: 20px;
+        margin: 25px 35px;
+        display: block;
+    }
+
+    .separator {
+        border-bottom: 1px solid #ebebeb;
+    }
+
+    .main_cont {
+        max-width: 1140px;
+        min-width: 200px;
+        width: 96%;
+        margin: 40px 2% 0 45px;
+    }
+
+    .txt_cont {
+        float: left;
+        display: inline-block;
+        min-width: 167px;
+        width: 16%;
+        font-size: 16px;
+        min-height: 42px;
+        font-weight: 500;
+        color: #333;
+        vertical-align: middle;
+    }
+
+    .txt {
+        height: 30px;
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .right_txt_top {
+        float: left;
+        display: inline-block;
+        width: 33%;
+        font-size: 13px;
+        font-weight: 700;
+        color: #777;
+        padding-left: 5px;
+        vertical-align: middle;
+    }
+
+    .left_txt {
+        float: left;
+        display: inline-block;
+        min-width: 167px;
+        width: 16%;
+        height: 42px;
+        color: #222;
+        font-size: 13px;
+        line-height: 16px;
+        vertical-align: middle;
+    }
+
+    .right_txt {
+        float: left;
+        display: inline-block;
+        width: 32%;
+        min-width: 160px;
+        margin: 0 0 8px 1%;
+        color: #555;
+        font-size: 11px;
+        padding-left: 5px;
+        vertical-align: middle;
+        position: relative;
+    }
+
+    .right_txt_style {
+        float: left;
+        display: inline-block;
+        width: 32%;
+        min-width: 160px;
+        margin: 0 0 8px 1%;
+        color: #555;
+        font-size: 11px;
+        padding-left: 5px;
+        vertical-align: middle;
+        position: relative;
+    }
+
+    .special_txt {
+        color: #666;
+        font-family: monospace;
+        font-size: 11px;
+        white-space: pre;
+    }
+
+    .space {
+        float: left;
+        display: inline-block;
+        min-width: 167px;
+        min-height: 41px;
+        vertical-align: middle;
+        width: 50%;
+    }
+
+    .input_cont {
+        width: 100%;
+        clear: both;
+    }
+
+    .input_box {
+        float: left;
+        display: inline-block;
+        min-width: 167px;
+        min-height: 41px;
+        vertical-align: middle;
+        width: 50%;
+    }
+
+    .input_field {
+        border-radius: 1px;
+        border: 1px solid #d9d9d9;
+        border-top: 1px solid #c0c0c0;
+        font-size: 13px;
+        height: 25px;
+        padding: 1px 8px;
+        width: 100%;
+        text-align: left;
+    }
+
+    .bttn-search {
+        user-select: none;
+        line-height: 100%;
+        height: 30px;
+        float: right;
+        margin: 10px 0;
+        cursor: default;
+        font-size: 11px;
+        font-weight: bold;
+        text-align: center;
+        white-space: nowrap;
+        background-color: #4d90fe;
+        border: 1px solid #3079ed;
+        color: #fff;
+        padding: 0 12px;
+        border-radius: 2px;
+    }
+
+    #logo {
+        width: 92px;
+        height: 32px;
+        display: block;
+        margin: 13px 0;
+    }
+    
+    #endl {
+        clear: both;
+    }
+
+    #input_padd {
+        padding-right: 16px;
+    }
+
+</style>
+
+<body>
+ <div class="links-cont">
+     <a href="search.html" class="links">Search</a>
+ </div>
+<div class="top_cont">
+    <a href="search.html" class="logo_cont">
+        <img src="google_logo.png" id="logo">
+    </a>
+</div>
+
+<div class="txt_advanced">
+    <label style="margin-left: 10px">Advanced Search</label>
+</div>
+<div class="separator"></div>
+<div class="main_cont">
+    <form action="https://google.com/search" method="GET" name="f">
+         <div style="clear: both;">
+             <div class="txt_cont">
+                 <div class="txt">
+                     <span>Find pages with...</span>
+                 </div>
+             </div>
+             <div class="space"></div>
+             <div class="right_txt_top">
+                 <div class="txt">
+                   To do this in the search box.
+                 </div>
+             </div>
+        </div>
+        <div class="input_cont">
+            <div id="endl">
+                <div class="left_txt">
+                    <div class="txt">
+                        <label for="first">all these words:</label>
+                    </div>
+                </div>
+                <div class="input_box">
+                    <div id="input_padd">
+                        <input class="input_field" name="as_q" type="text" id="first">
+                    </div>
+                </div>
+                <div class="right_txt_style right_txt">
+                    <div class="txt">
+                        Type the important words:
+                        <span class="special_txt">tri-colour rat terrier</span>
+                    </div>
+                </div>
+            </div>
+            <div id="endl">
+                <div class="left_txt">
+                    <div class="txt">
+                        <label for="second">this exact word or phrase:</label>
+                    </div>
+                </div>
+                <div class="input_box">
+                    <div id="input_padd">
+                        <input class="input_field" name="as_epq" type="text" id="second">
+                    </div>
+                </div>
+                <div class="right_txt_style right_txt">
+                    <div class="txt">
+                        Put exact words in quotes:
+                        <span class="special_txt">"rat terrier"</span>
+                    </div>
+                </div>
+            </div>
+            <div id="endl">
+                <div class="left_txt">
+                    <div class="txt">
+                        <label for="third">any of these words:</label>
+                    </div>
+                </div>
+                <div class="input_box">
+                    <div id="input_padd">
+                        <input class="input_field" name="as_oq" type="text" id="third">
+                    </div>
+                </div>
+                <div class="right_txt_style right_txt">
+                    <div class="txt">
+                        Type <span class="special_txt">OR</span> between all the words you want:
+                        <span class="special_txt">miniature OR standard</span>
+                    </div>
+                </div>
+            </div>
+            <div id="endl">
+                <div class="left_txt">
+                    <div class="txt">
+                        <label for="fourth">none of these words:</label>
+                    </div>
+                </div>
+                <div class="input_box">
+                    <div id="input_padd">
+                        <input class="input_field" name="as_eq" type="text" id="fourth">
+                    </div>
+                </div>
+                <div class="right_txt_style right_txt">
+                    <div class="txt">
+                        Put a minus sign just before words that you don't want:
+                        <span class="special_txt">-rodent, -"Jack Russell"</span>
+                    </div>
+                </div>
+            </div>
+            <div id="endl">
+                <div class="left_txt">
+                    <div class="txt">
+                        <label for="fifth">none of these words:</label>
+                    </div>
+                </div>
+                
+                <div class="input_box" style="position: relative;">
+                    <div style="display:table;width:100%">
+                        <div style="display:table-cell;padding-right:16px">
+                            <input class="input_field" id="fifth" name="as_nlo" type="text">
+                        </div>
+                        <div style="display:table-cell;width:40px;padding-right:6px;padding-left:6px;text-align:center;font-size:13px;color:#222">
+                            to
+                        </div>
+                        <div style="display:table-cell;padding-right:16px">
+                            <input class="input_field" name="as_nhi" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="right_txt_style right_txt">
+                    <div class="txt">
+                        Put two full stops between the numbers and add a unit of measurement:
+                        <span class="special_txt">10..35 kg, £300..£500, 2010..2011</span>
+                    </div>
+                </div>
+            </div>
+            <div id="endl" style="margin-top: 50px;">
+                 <div class="left_txt"></div>
+                 <div class="input_box">
+                     <input name="tbs" type="hidden" value="">
+                     <input class="bttn-search"
+                         style="-webkit-user-select:none;user-select:none;line-height:100%;height:30px;min-width:120px"
+                         value="Advanced Search" type="submit">
+                 </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

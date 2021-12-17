@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <title>Google images</title>
+</head>
+<style>
+    html {
+        font-family: Arial, sans-serif;
+    }
+
+    .center {
+        display: block;
+        text-align: -webkit-center;
+    }
+
+    .searchBox {
+        background: #fff;
+        display: flex;
+        border: 1px solid #dfe1e5;
+        box-shadow: none;
+        border-radius: 24px;
+        z-index: 3;
+        height: 39.5px;
+        margin: 0 auto;
+        width: 460px;
+        flex: 1;
+        padding: 2px 8px 2px 16px;
+        padding-left: 14px;
+        margin-top: 5px;
+        width: 514px;
+    }
+
+    .txt {
+        background-color: transparent;
+        border: none;
+        margin: 0;
+        padding: 0;
+        color: rgba(0, 0, 0, .87);
+        word-wrap: break-word;
+        outline: none;
+        display: inline-flex;
+        flex: 100%;
+        margin-top: auto;
+        margin-bottom: auto;
+        font: 16px arial, sans-serif;
+        line-height: 34px;
+        height: 34px !important;
+        -webkit-appearance: textfield;
+        padding-left: 14px;
+    }
+
+     .links-cont {
+        min-width: 165px;
+        padding-left: 30px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        padding-right: 30px;
+        position: relative;
+        text-align: right;
+        z-index: 986;
+        -webkit-align-items: center;
+        align-items: center;
+        justify-content: flex-end;
+     }
+
+     .links {
+        font: Arial;
+        font-size: 13px;
+        color: rgba(0,0,0,0.87);
+        text-decoration: none;
+        display: inline-block;
+        line-height: 24px;
+        outline: none;
+        vertical-align: middle;
+        padding-left: 15px;
+     }
+
+    a:hover {
+        color: #221;
+        text-decoration: underline;
+    }
+
+    div.searchBox:hover {
+        border: 1px;
+        box-shadow: 2px 2px 2px 2px lightgrey;
+        padding: 3px 8px 3px 16px;
+    }
+
+   .img-cont {
+       margin-top: 37px;
+       display: block;
+   }
+
+    #logo { 
+        padding-top: 109px;
+        background-size: 272px 92px;
+        height: 92px;
+        width: 272px;
+        display: inherit;
+    }
+
+    .logo-subtext {
+        color: #4285f4;
+        font: 16px/16px roboto-regular, arial, sans-serif;
+        left: 105px;
+        position: relative;
+        top: -16px;
+        white-space: nowrap;
+    }
+
+    .search-bttn {
+        flex: 0 0 auto;
+        padding-right: 13px;
+        width: 44px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        flex: 0 0 auto;
+        padding: 0;
+        align-items: flex-start;
+        box-sizing: border-box;
+        margin-top: 0em;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 11px;
+        font-family: system-ui;
+        font-variant-caps: normal;
+        color: initial;
+        letter-spacing: normal;
+        word-spacing: normal;
+        line-height: normal;
+        text-transform: none;
+        text-indent: 0px;
+        text-shadow: none;
+        display: inline-block;
+    }
+
+    #search {
+        margin-top: auto;
+        margin-bottom: auto;
+        color: #9aa0a6;
+        margin-left: 4px;
+        opacity: 0.6;
+        font-size: 14px;
+        
+    }
+
+     #search2 {
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-right: 13px;
+        color:#4285f4;
+        font-size: 18px;
+     }
+
+</style>
+
+<body>
+    <div class="links-cont">
+        <a href="search.html" class="links">Search</a>
+    </div>
+    <center>
+        <div class="img-cont">
+            <img src="./google_logo.png" id="logo">
+            <div class="logo-subtext">
+                <span>images</span>
+            </div>
+        </div>
+        </div>
+    </center>
+    
+    <form action="https://www.google.com/search?" style="margin-left: 24px; margin-right: 24px;">
+        <div class="searchBox" >
+            <i id="search" class="fas fa-search"></i>
+            <input type="text" name="q" class="txt">
+            <input type="hidden" name="tbm" value="isch">
+            <button class="search-bttn" type="submit">
+                <i id="search2" class="fas fa-search"></i>
+            </button>
+            
+            
+        </div>
+        
+
+    </form>
+
+</body>
+
+</html>

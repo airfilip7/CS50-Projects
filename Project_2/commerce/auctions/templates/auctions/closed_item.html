@@ -1,0 +1,54 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block body %}
+<div style="height: 80px; margin-bottom: 20px">
+    <h1> {{ item.name }} </h1>
+</div>
+
+<center>
+    <img src="http://127.0.0.1:8000{{ item.photo.url }}" class="item_img">
+</center>
+<div class="arrange">
+    <p style="font-size:20px">The winner is <span class="badge bg-success" style="color: white; font-size: 20px">{{ winner }}</span></p>
+</div>
+
+<div class="arrange">
+    <h4>Details</h4>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"> Published by: {{ publisher }} </li>
+        <li class="list-group-item"> Category: {{ item.category }} </li>
+        <li class="list-group-item"> Starting at: ${{ item.starting }} </li>
+        <li class="list-group-item"> Description: {{ item.description }} </li>
+        {% if not item.date_created %}
+        <li class="list-group-item"> Date published: n/a </li>
+        {% else %}
+        <li class="list-group-item"> Date published: {{ item.date_created }} </li>
+        {% endif %}
+    </ul>
+</div>
+
+<div class="current">
+    Winning bid: <strong> ${{ current }} </strong>
+</div>
+
+<div class="arrange">
+<h4 style="padding-bottom: 30px"> Comments </h4>
+{% for comment in comments %}
+    <div class="card text-left" style="width: 75%; margin-bottom: 25px;margin-left: 40px">
+        <div class="card-header" style="display: inline-block">
+            {{ comment.user }} <p style="float: right"> {{ comment.date_posted }} </p>
+        </div>
+        <div class="card-body">
+            <p class="card-text" style="float: left">{{ comment.description }}</p>
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+
+{% endblock %}

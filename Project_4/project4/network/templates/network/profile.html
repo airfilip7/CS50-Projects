@@ -1,0 +1,142 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block title %}
+    {{user1.username}}'s profile
+{% endblock %}
+
+{% block body %}
+
+<div class="container" style='margin: 0px; max-width:4000px; background-color: #ebebe0; padding-bottom: 20px'>
+    <div class="row">
+        <div class="col-6" style="margin-top:30px">
+            <p class="h1 text-start" id="username">{{user1.username}}</p>
+        </div>
+        <div class="col-4" style="margin-top:30px">
+            <div class="row">
+                <div class="col">
+                    <span style="font-size:28px" style="margin-top:10px"> Followers </span>
+                </div>
+                <div class="col">
+                    <span style="font-size:28px" >  Following  </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col" style="margin-top:-10px">
+                    <span style="font-size:28px" id="fllwerscount">  {{ user1.followers.count}}  </span>
+                </div>
+                <div class="col" style="margin-top:-10px">
+                    <span style="font-size:28px" id="fllwingcount">  {{ user1.following.count}}  </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-2" style="margin-top:30px">
+            {% if user1.pk is not user.pk  %}
+                <button type="button" class="btn btn-light rounded" id="follow" style="height:50px;width: 100px; border: 1px solid #468189">
+                    {% if follows is None%}
+                        Follow
+                    {% else %}
+                        Unfollow
+                    {% endif %} 
+                </button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div style=" padding: 10px; margin: 30px 0 30px 15px">
+    <button type="button" class="btn btn-outline-info" id="add_post">Add post</button>
+</div>
+
+<center>
+    <div class="rounded width_1" id="add">
+        <div class="mb-3" style="padding: 20px; padding-top: 40px">
+            <center>
+            <form id="add_form">
+                <textarea class="form-control rounded" id="exampleFormControlTextarea1" rows="3" placeholder="Write what's on your mind..."></textarea>
+                <div class="mb-3"></div>
+                <div class="left">
+                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-add"> Cancel </button>
+                </div>
+            </form>
+            </center>
+        </div>
+    </div>
+</center>
+
+<center>
+    <div id="message" style="margin-bottom: 50px; margin-top: -20px" role="alert"> </div>
+</center>
+
+
+<center>
+{% if request.user is user1 %}
+    <div id="feed">
+{% else %}
+    <div id="not-self">
+{% endif %}
+{% for post in page_obj%}
+<div id="post-container">
+    <div class="card rounded width_1" style="margin-bottom: 20px; box-shadow: 1px 2px 2px grey;">
+        <div class="card-header" style="display: inline-block">
+            <a href="{% url 'profile' post.User.username%}" style="float: left">{{ post.User.username}}</a>
+            <div style="float: right">
+                <span >{{ post.timestamp }}</span>
+                {% if user.pk is post.User.pk %}
+                   | <span class="fake-link" id="edit" data-pk={{ post.pk }}>Edit</span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text multiline" style="text-align: left" id="post-content-{{post.id}}">{{ post.content }}</p>
+            <form class="edit_form" id="edit_form_{{post.pk}}" data-pk="{{post.id}}" style="display: none;">
+                <textarea class="form-control rounded" id="edit_{{post.id}}" rows="3" data-pk={{ post.pk }}>{{ post.content }}</textarea>
+                <div class="mb-3"></div>
+                <div class="left">
+                    <button type="submit" class="btn btn-primary" id="update" data-pk= {{ post.pk }}>Update</button>
+                    <button type="button" class="btn btn-secondary" id="cancel" data-pk= {{ post.pk }}> Cancel </button>
+                </div>
+                </br>
+            </form>
+            <div id="post-message-{{post.pk}}" role="alert"> </div>
+            <div class="left">
+                {% if request.user in post.likes.all %}
+                    <i class="fas fa-heart" style="color:red;" id="like" data-pk={{post.id}} data-liked="yes"></i>
+                {% elif request.user not in post.likes.all%}
+                    <i class="far fa-heart" style="color:red;" id="like" data-pk={{post.id}} data-liked="no"></i>
+                {% endif %}
+                <span style="margin-left: 4px;" id="like-count-{{post.id}}">{{ post.likes.count }}</span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+</center>
+
+<center>
+    <nav aria-label="Page navigation example" style="margin: 80px 0 80px 0">
+        <ul class="pagination" style="display: inline-flex">
+            {% if page_obj.has_previous %}
+                 <li class="page-item"><a class="page-link" href="?page=1">&laquo; </a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}"> &raquo;</a></li>
+            {% endif %}
+        </ul>
+        <span class="current" style="display: block">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+    </nav>
+</center>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/follow.js' %}"></script>    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{% static 'network/network.js' %}"></script>
+{% endblock %}

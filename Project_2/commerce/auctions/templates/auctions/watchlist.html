@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+    Watchlist
+{% endblock title %}
+
+{% block body %}
+<h2> {{ user }}'s Watchlist </h2>
+
+{% if list %}
+    {% for item in list %}
+        <div class="item_container">
+        <div class="container" style="padding-left: 35px;margin-left: 1px; margin-right: 1px ; max-width: 3120px">
+        <a href="{% url 'view' item.name%}" style="text-decoration:none; color: black">
+            <div class="row" style="width: 100%">
+                <div class="col">
+                        <div class="item" style="float:left">
+                            <img src="{{ item.photo.url }}" style="vertical-align:middle">
+                        </div>
+                </div>
+                <div class="col" style="padding-left: 30px">
+                    <h6 style="padding-top: 10px">{{ item.name }}</h6> </br>
+                    <span style="color: grey;"> Starting price: <strong> ${{ item.starting }} </strong> </span> </br>
+                    {% if not current|lookup:item.pk %}
+                        Current bid: <strong> No bids yet </strong> </br>
+                    {% else %}
+                        Current bid: <strong> ${{ current|lookup:item.pk }} </strong> </br>
+                    {% endif %}
+                    <p> Category: <strong> {{ item.category }} </strong> </p>
+                    </br>
+                    {% if item.date_created %}
+                        <p style="color: grey; font-size: 14px;">Created {{ item.date_created}}</p>
+                    {% endif %}
+                </div>
+                <div class="col" style="padding-top: 10px">
+                   {{ item.description }}
+                </div>
+            </div>
+        </a>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="alert alert-info" role="alert">
+        List is empty
+    </div>
+    <a href="{% url 'index' %}">Look now</a>
+{% endif %}
+
+
+
+
+{% endblock %}

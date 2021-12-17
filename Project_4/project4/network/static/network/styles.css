@@ -1,0 +1,40 @@
+#add {
+    display: none;
+    border: 1px solid black;
+    margin-bottom: 30px;
+}
+
+.rounded {
+     border-radius: 12px !important;
+}
+
+.left {
+    text-align: left;
+}
+
+.width_1 {
+     width: 75%;
+}
+
+.btn-light:hover {
+    background-image: none !important;
+    background-color: #468189 !important;
+    color: white !important;
+}
+
+.fake-link {
+    color: #007bff;
+    cursor: pointer;
+}
+
+.fake-link:hover {
+    text-decoration: underline;
+}
+
+.multiline {
+    white-space: pre-wrap;
+}
+
+.fa-heart {
+    cursor: pointer;
+}
